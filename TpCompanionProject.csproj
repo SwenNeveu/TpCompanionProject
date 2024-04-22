@@ -8,4 +8,25 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Views\Aide\**" />
+    <Compile Remove="Views\Promo\**" />
+    <Compile Remove="Views\Tp\**" />
+    <EmbeddedResource Remove="Views\Aide\**" />
+    <EmbeddedResource Remove="Views\Promo\**" />
+    <EmbeddedResource Remove="Views\Tp\**" />
+    <None Remove="Views\Aide\**" />
+    <None Remove="Views\Promo\**" />
+    <None Remove="Views\Tp\**" />
+    <Page Remove="Views\Aide\**" />
+    <Page Remove="Views\Promo\**" />
+    <Page Remove="Views\Tp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="MySql.Data" Version="8.3.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
+  </ItemGroup>
+
 </Project>
