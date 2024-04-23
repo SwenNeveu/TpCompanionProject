@@ -1,0 +1,54 @@
+﻿<Page x:Class="TpCompanionProject.Views.Pages_TP.ViewTP"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TpCompanionProject.Views.Pages_TP"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ViewTP">
+
+    <Grid>
+        
+        <ListBox x:Name="PromotionsListBox" ItemsSource="{Binding Promotions}" Style="{StaticResource CustomListBoxStyle}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Nom}" FontWeight="Bold"/>
+                        <ListBox ItemsSource="{Binding Tps}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Nom}" Margin="5"/>
+                                        <TextBlock Text="{Binding Dte_Debut, StringFormat='yyyy-MM-dd'}" Margin="5"/>
+                                        <TextBlock Text="{Binding Dte_Fin, StringFormat='yyyy-MM-dd'}" Margin="5"/>
+                                        <!-- Ajoutez ici les boutons pour voir les aides, voir les tâches, modifier et supprimer -->
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <ListBox ItemsSource="{Binding Groupes}">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <ListBox ItemsSource="{Binding Tps}">
+                                        <ListBox.ItemTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Nom}" Margin="5"/>
+                                                    <TextBlock Text="{Binding Dte_Debut, StringFormat='yyyy-MM-dd'}" Margin="5"/>
+                                                    <TextBlock Text="{Binding Dte_Fin, StringFormat='yyyy-MM-dd'}" Margin="5"/>
+                                                    <!-- Ajoutez ici les boutons pour voir les aides, voir les tâches, modifier et supprimer -->
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </ListBox.ItemTemplate>
+                                    </ListBox>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+    </Grid>
+</Page>

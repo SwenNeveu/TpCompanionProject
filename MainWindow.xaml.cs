@@ -28,7 +28,18 @@ namespace TpCompanionProject
 
         private void ButtonVoirAide_Click(object sender, RoutedEventArgs e)
         {
-            FrameTpCompanion.Navigate(new Views.PageAide());
+           
+        }
+
+        private void ButtonVoirPromo_Click(object sender, RoutedEventArgs e)
+        {
+            FrameTpCompanion.Navigate(new Views.PagesPromotion.ViewPromotion());
+        }
+
+        private void ButtonVoirTps_Click(object sender, RoutedEventArgs e)
+        {
+            FrameTpCompanion.Navigate(new Views.Pages_TP.ViewTP());
+
         }
     }
 }

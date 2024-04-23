@@ -30,23 +30,18 @@ namespace TpCompanionProject.Ado
             ado.CloseConnection(connection);
             return Groupes;
         }
-        // get a group by id
-        public Groupe GetGroupeById(int id)
+        //update a group
+        public void UpdateGroupe(Groupe Groupe)
         {
-            Groupe Groupe = new Groupe("");
             MySqlConnection connection = ado.OpenConnection();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Groupe WHERE id_groupe = @id";
-            command.Parameters.AddWithValue("id", id);
-            MySqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                Groupe.Id = (int)reader["id_groupe"];
-                Groupe.Nom = reader["nom"].ToString();
-            }
+            command.CommandText = "UPDATE Groupe SET Nom = @nom WHERE id_groupe = @id";
+            command.Parameters.AddWithValue("nom", Groupe.Nom);
+            command.Parameters.AddWithValue("id", Groupe.Id);
+            command.ExecuteNonQuery();
             ado.CloseConnection(connection);
-            return Groupe;
         }
+
         // add a group
         public void AddGroupe(Groupe Groupe, Promotion promo)
         {

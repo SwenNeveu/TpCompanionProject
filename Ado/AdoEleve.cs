@@ -76,7 +76,7 @@ namespace TpCompanionProject.Ado
             ado.CloseConnection(connection);
         }
         //delete a student
-        public void DeleteEleve(Eleve Eleve)
+        public void DeleteEleve(Eleve Eleve) 
         {
             MySqlConnection connection = ado.OpenConnection();
             MySqlCommand command = connection.CreateCommand();

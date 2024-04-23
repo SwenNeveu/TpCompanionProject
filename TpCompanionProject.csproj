@@ -24,6 +24,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\PagesPromotion\PageEditPromotion.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="Views\PagesPromotion\PageEditPromotion.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="EntityFramework" Version="6.4.4" />
     <PackageReference Include="MySql.Data" Version="8.3.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
