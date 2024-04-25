@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,11 +25,57 @@ namespace TpCompanionProject.Views.Pages_TP
         public List<Promotion>? Promotions { get; set; }
         public ViewTP()
         {
-            InitializeComponent();
+            
             App app = (App)Application.Current;
+            app.Refresh();
             Promotions = app.Promotions;
             DataContext = this;
+            InitializeComponent();
         }
+        private void PromotionsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PromotionsComboBox.SelectedIndex != -1)
+            {
+                // Get the selected promotion
+                var selectedPromotion = (Promotion)PromotionsComboBox.SelectedItem;
+
+                // Populate the DataGrid with tasks of the selected promotion
+                TPsDataGrid.ItemsSource = selectedPromotion.Tps;
+
+                // Show the GroupsComboBox and populate it with groups of the selected promotion
+                GroupsComboBox.Visibility = Visibility.Visible;
+                GroupsComboBox.ItemsSource = selectedPromotion.Groupes;
+            }
+        }
+
+        private void GroupsComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (GroupsComboBox.SelectedIndex != -1)
+            {
+                // Get the selected group
+                var selectedGroup = (Groupe)GroupsComboBox.SelectedItem;
+
+                // Update the DataGrid to display tasks for the selected group
+                TPsDataGrid.ItemsSource = selectedGroup.Tps;
+                ClearGroupSelectionButton.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void ClearGroupSelectionButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Clear the selection of the GroupsComboBox
+            GroupsComboBox.SelectedIndex = -1;
+
+            // Hide the ClearGroupSelectionButton
+            ClearGroupSelectionButton.Visibility = Visibility.Collapsed;
+
+            // Get the selected promotion
+            var selectedPromotion = (Promotion)PromotionsComboBox.SelectedItem;
+
+            // Populate the DataGrid with tasks of the selected promotion
+            TPsDataGrid.ItemsSource = selectedPromotion.Tps;
+        }
+
 
         public void ViewTaches_Click(object sender, RoutedEventArgs e)
         {
@@ -43,6 +90,11 @@ namespace TpCompanionProject.Views.Pages_TP
 
         }
         public void Supprimer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AddTpButton_Click(object sender, RoutedEventArgs e)
         {
 
         }

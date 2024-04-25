@@ -9,46 +9,42 @@
       Title="ViewTP">
 
     <Grid>
-        
-        <ListBox x:Name="PromotionsListBox" ItemsSource="{Binding Promotions}" Style="{StaticResource CustomListBoxStyle}">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding Nom}" FontWeight="Bold"/>
-                        <ListBox ItemsSource="{Binding Tps}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding Nom}" Margin="5"/>
-                                        <TextBlock Text="{Binding Dte_Debut, StringFormat='yyyy-MM-dd'}" Margin="5"/>
-                                        <TextBlock Text="{Binding Dte_Fin, StringFormat='yyyy-MM-dd'}" Margin="5"/>
-                                        <!-- Ajoutez ici les boutons pour voir les aides, voir les tâches, modifier et supprimer -->
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                        <ListBox ItemsSource="{Binding Groupes}">
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <ListBox ItemsSource="{Binding Tps}">
-                                        <ListBox.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="{Binding Nom}" Margin="5"/>
-                                                    <TextBlock Text="{Binding Dte_Debut, StringFormat='yyyy-MM-dd'}" Margin="5"/>
-                                                    <TextBlock Text="{Binding Dte_Fin, StringFormat='yyyy-MM-dd'}" Margin="5"/>
-                                                    <!-- Ajoutez ici les boutons pour voir les aides, voir les tâches, modifier et supprimer -->
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ListBox.ItemTemplate>
-                                    </ListBox>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                    </StackPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Button x:Name="AddTpButton" Content="Ajouter un Tp" Click="AddTpButton_Click" />
+        <!-- Selector for promotions -->
+        <ComboBox x:Name="PromotionsComboBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"
+              DisplayMemberPath="Nom" SelectedValuePath="Nom" ItemsSource="{Binding Promotions}" SelectedIndex="-1"
+              SelectionChanged="PromotionsComboBox_SelectionChanged" />
 
+        <!-- Selector for groups -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+            <!-- Selector for groups -->
+            <ComboBox x:Name="GroupsComboBox" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+                  DisplayMemberPath="Nom" SelectedValuePath="Nom" SelectedIndex="-1"
+                  SelectionChanged="GroupsComboBox_SelectionChanged">
+            </ComboBox>
+
+            <!-- Button to clear group selection -->
+            <Button x:Name="ClearGroupSelectionButton" Content="Delete" HorizontalAlignment="Right" Margin="5"
+                Visibility="Collapsed" Click="ClearGroupSelectionButton_Click"/>
+        </StackPanel>
+
+        <!-- DataGrid to display tasks -->
+        <DataGrid x:Name="TPsDataGrid" Grid.Row="2" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+              CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" Style="{StaticResource CustomDataGridStyle}">
+            <!-- Define columns for the DataGrid -->
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
+                <DataGridTextColumn Header="Date Début" Binding="{Binding Dte_Debut, StringFormat='yyyy-MM-dd'}"/>
+                <DataGridTextColumn Header="Date Fin" Binding="{Binding Dte_Fin, StringFormat='yyyy-MM-dd'}"/>
+                <!-- Add more columns if needed -->
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
+
+
 </Page>

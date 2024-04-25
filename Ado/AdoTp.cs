@@ -19,7 +19,7 @@ namespace TpCompanionProject.Ado
             List<Tp> Tps = new List<Tp>();
             MySqlConnection connection = ado.OpenConnection();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Tp WHERE fk_id_promo = @fk_id_promo";
+            command.CommandText = "SELECT * FROM Tp WHERE fk_id_promo = @fk_id_promo AND fk_id_groupe IS NULL";
             command.Parameters.AddWithValue("fk_id_promo", fk_id_promo);
             MySqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
