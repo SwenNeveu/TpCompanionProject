@@ -1,4 +1,4 @@
-﻿<Page x:Class="TpCompanionProject.Views.Pages_TP.ViewTP"
+﻿<Page  x:Class="TpCompanionProject.Views.Pages_TP.ViewTP"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,41 +7,65 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="ViewTP">
+    <Page.Resources>
 
+
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Button x:Name="AddTpButton" Content="Ajouter un Tp" Click="AddTpButton_Click" />
+        <Button x:Name="AddTpButton" Style="{StaticResource ValidationButtonStyle}" Content="Ajouter un Tp" Click="AddTpButton_Click" HorizontalAlignment="Left" />
         <!-- Selector for promotions -->
-        <ComboBox x:Name="PromotionsComboBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"
+        <ComboBox x:Name="PromotionsComboBox" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center" 
               DisplayMemberPath="Nom" SelectedValuePath="Nom" ItemsSource="{Binding Promotions}" SelectedIndex="-1"
-              SelectionChanged="PromotionsComboBox_SelectionChanged" />
+              SelectionChanged="PromotionsComboBox_SelectionChanged" Style="{StaticResource SimpleComboBoxStyle}"/>
 
         <!-- Selector for groups -->
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" >
             <!-- Selector for groups -->
-            <ComboBox x:Name="GroupsComboBox" HorizontalAlignment="Stretch" VerticalAlignment="Center"
+            <ComboBox x:Name="GroupsComboBox" VerticalAlignment="Center"
                   DisplayMemberPath="Nom" SelectedValuePath="Nom" SelectedIndex="-1"
-                  SelectionChanged="GroupsComboBox_SelectionChanged">
-            </ComboBox>
+                  SelectionChanged="GroupsComboBox_SelectionChanged" Width="122" Style="{StaticResource SimpleComboBoxStyle}"/>
 
             <!-- Button to clear group selection -->
-            <Button x:Name="ClearGroupSelectionButton" Content="Delete" HorizontalAlignment="Right" Margin="5"
-                Visibility="Collapsed" Click="ClearGroupSelectionButton_Click"/>
+            <Button x:Name="ClearGroupSelectionButton" Content="Déselectionner" HorizontalAlignment="Right" 
+                Visibility="Collapsed" Click="ClearGroupSelectionButton_Click" Style="{StaticResource ValidationButtonStyle}"/>
         </StackPanel>
 
         <!-- DataGrid to display tasks -->
-        <DataGrid x:Name="TPsDataGrid" Grid.Row="2" AutoGenerateColumns="False" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-              CanUserResizeRows="False" CanUserResizeColumns="False" IsReadOnly="True" Style="{StaticResource CustomDataGridStyle}">
+        <DataGrid Grid.Row="2" Style="{StaticResource CustomDataGridStyle}" x:Name="TPsDataGrid" FontSize="16" GridLinesVisibility="None" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="Cell" Background="#FFE0C4C4" BorderBrush="Black" >
+                    <DataGrid.CellStyle>
+                <Style/>
+            </DataGrid.CellStyle>
             <!-- Define columns for the DataGrid -->
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}"/>
-                <DataGridTextColumn Header="Date Début" Binding="{Binding Dte_Debut, StringFormat='yyyy-MM-dd'}"/>
-                <DataGridTextColumn Header="Date Fin" Binding="{Binding Dte_Fin, StringFormat='yyyy-MM-dd'}"/>
-                <!-- Add more columns if needed -->
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="*"/>
+                <DataGridTextColumn Header="Date Début" Binding="{Binding Dte_Debut, StringFormat='yyyy-MM-dd'}" Width="*"/>
+                <DataGridTextColumn Header="Date Fin" Binding="{Binding Dte_Fin, StringFormat='yyyy-MM-dd'}" Width="*"/>
+                <DataGridTemplateColumn Header="Voir les tâches" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Voir les tâches" Style="{StaticResource ValidationButtonStyle}" ClickMode="Press" x:Name="ViewTaches" Click="ViewTaches_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Modifier" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Modifier" ClickMode="Press" x:Name="EditButton" Click="Modifier_Click" Style="{StaticResource ValidationButtonStyle}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Supprimer" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Content="Supprimer" ClickMode="Press" x:Name="Suppr" Click="Supprimer_Click" Style="{StaticResource DeleteButtonStyle}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

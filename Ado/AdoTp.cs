@@ -65,12 +65,27 @@ namespace TpCompanionProject.Ado
             command.ExecuteNonQuery();
             ado.CloseConnection(connection);
         }
+        //insert a tp for a groupe
+        public void AddTp(Tp Tp, int fk_id_groupe, int fk_id_promo)
+        {
+            MySqlConnection connection = ado.OpenConnection();
+            MySqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Tp (Nom, Dte_Debut, Dte_Fin, is_visible, fk_id_groupe, fk_id_promo) VALUES (@nom, @dte_debut, @dte_fin, @is_visible, @fk_id_groupe, @fk_id_promo)";
+            command.Parameters.AddWithValue("nom", Tp.Nom);
+            command.Parameters.AddWithValue("dte_debut", Tp.Dte_Debut);
+            command.Parameters.AddWithValue("dte_fin", Tp.Dte_Fin);
+            command.Parameters.AddWithValue("is_visible", Tp.IsVisible);
+            command.Parameters.AddWithValue("fk_id_groupe", fk_id_groupe);
+            command.Parameters.AddWithValue("fk_id_promo", fk_id_promo);
+            command.ExecuteNonQuery();
+            ado.CloseConnection(connection);
+        }
         //update a tp
         public void UpdateTp(Tp Tp)
         {
             MySqlConnection connection = ado.OpenConnection();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE Tp SET Nom = @nom, Dte_Debut = @dte_debut, Dte_Fin = @dte_fin, is_visible = @is_visible WHERE Id = @id";
+            command.CommandText = "UPDATE Tp SET Nom = @nom, Dte_Debut = @dte_debut, Dte_Fin = @dte_fin, is_visible = @is_visible WHERE id_tp = @id";
             command.Parameters.AddWithValue("nom", Tp.Nom);
             command.Parameters.AddWithValue("dte_debut", Tp.Dte_Debut);
             command.Parameters.AddWithValue("dte_fin", Tp.Dte_Fin);
@@ -84,7 +99,7 @@ namespace TpCompanionProject.Ado
         {
             MySqlConnection connection = ado.OpenConnection();
             MySqlCommand command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM Tp WHERE Id = @id";
+            command.CommandText = "DELETE FROM Tp WHERE id_tp = @id";
             command.Parameters.AddWithValue("id", Tp.Id);
             command.ExecuteNonQuery();
             ado.CloseConnection(connection);

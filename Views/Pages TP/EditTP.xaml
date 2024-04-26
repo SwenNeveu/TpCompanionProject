@@ -1,0 +1,19 @@
+﻿<Page x:Class="TpCompanionProject.Views.Pages_TP.EditTP"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TpCompanionProject.Views.Pages_TP"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EditTP">
+
+    <Grid>
+        <StackPanel Grid.Row="1"  x:Name="StackAdd">
+        <TextBox x:Name="titleTextBox" Width="200" Margin="0 10" Style="{StaticResource SimpleTextBoxStyle}"/>
+        <DatePicker x:Name="startDatePicker" Width="200" />
+        <DatePicker x:Name="endDatePicker" Width="200"/>
+        <Button Content="Modifier ce TP" Click="EditTpButton_Click" Style="{StaticResource ValidationButtonStyle}" x:Name="ModifierTpButton" Width="100" Margin="0 10" />
+        </StackPanel>
+    </Grid>
+</Page>

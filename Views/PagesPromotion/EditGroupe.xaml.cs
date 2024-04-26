@@ -30,6 +30,7 @@ namespace TpCompanionProject.Views.PagesPromotion
             Groupe = groupe;
             InitializeComponent();
             Promotion = promotion;
+            GroupeNom.Text = Groupe.Nom;
         }
         public void AcceptButton_Click(object sender, RoutedEventArgs e)
         {

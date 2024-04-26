@@ -13,7 +13,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button x:Name="AddButton" Content="Ajouter un eleve" HorizontalAlignment="Left" Click="AddButton_Click"/>
+        <Button Style="{StaticResource ValidationButtonStyle}" x:Name="AddButton" Content="Ajouter un eleve" HorizontalAlignment="Left" Click="AddButton_Click"/>
         <DataGrid Grid.Row="1" Style="{StaticResource CustomDataGridStyle}" x:Name="GridEleve" FontSize="16" GridLinesVisibility="None" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="Cell" Background="#FFE0C4C4" BorderBrush="Black" >
             <DataGrid.CellStyle>
                 <Style/>
@@ -24,14 +24,14 @@
                 <DataGridTemplateColumn Header="Modifier" Width="*">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
-                        <Button Content="Modifier" ClickMode="Press" x:Name="EditButton" Click="EditButton_Click"/>
+                            <Button Content="Modifier" ClickMode="Press" x:Name="EditButton" Click="EditButton_Click" Style="{StaticResource ValidationButtonStyle}"/>
                     </DataTemplate>
                 </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Supprimer" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Supprimer" ClickMode="Press" x:Name="SupprButton" Click="SupprButton_Click"/>
+                            <Button Content="Supprimer"  ClickMode="Press" x:Name="SupprButton" Click="SupprButton_Click" Style="{StaticResource DeleteButtonStyle}"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

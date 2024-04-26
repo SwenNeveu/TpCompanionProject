@@ -11,10 +11,10 @@
     <Grid>
         <StackPanel>
             <TextBlock Text="Nom:"/>
-            <TextBox x:Name="txtNom"/>
+            <TextBox x:Name="txtNom" Style="{StaticResource SimpleTextBoxStyle}"/>
             <TextBlock Text="Prenom:"/>
-            <TextBox x:Name="txtPrenom"/>
-            <Button Content="Accept" x:Name="AcceptButton" Click="AcceptButton_Click"/>
+            <TextBox x:Name="txtPrenom" Style="{StaticResource SimpleTextBoxStyle}"/>
+            <Button Content="Accept" x:Name="AcceptButton" Click="AcceptButton_Click" Style="{StaticResource ValidationButtonStyle}"/>
         </StackPanel>
     </Grid>
 </Page>

@@ -13,7 +13,7 @@
     <RowDefinition Height="Auto"/>
     <RowDefinition Height="*"/>
 </Grid.RowDefinitions>
-<Button x:Name="AddButton" Content="Ajouter un groupe" HorizontalAlignment="Left" Click="AddButton_Click"/>
+        <Button x:Name="AddButton" Content="Ajouter un groupe" HorizontalAlignment="Left" Click="AddButton_Click" Style="{StaticResource ValidationButtonStyle}"/>
         <DataGrid Grid.Row="1" Style="{StaticResource CustomDataGridStyle}" x:Name="GridGroupe" FontSize="16" GridLinesVisibility="None" AutoGenerateColumns="False" SelectionMode="Single" SelectionUnit="Cell" Background="#FFE0C4C4" BorderBrush="Black" >
     <DataGrid.CellStyle>
         <Style/>
@@ -23,21 +23,21 @@
                 <DataGridTemplateColumn Header="Voir les Eleves" Width="*">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                    <Button Content="Voir les Eleves" x:Name="ButtonVoirEleve" ClickMode="Press" Click="ButtonVoirEleve_Click"/>
+                            <Button Content="Voir les Eleves" Style="{StaticResource ValidationButtonStyle}" x:Name="ButtonVoirEleve" ClickMode="Press" Click="ButtonVoirEleve_Click"/>
                 </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTemplateColumn Header="Modifier" Width="*">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                    <Button Content="Modifier" x:Name="ModifButton" ClickMode="Press" Click="ModifButton_Click" InputScope="Default"/>
+                            <Button Content="Modifier" Style="{StaticResource ValidationButtonStyle}" x:Name="ModifButton" ClickMode="Press" Click="ModifButton_Click" InputScope="Default"/>
                 </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>
         <DataGridTemplateColumn Header="Supprimer" Width="*">
             <DataGridTemplateColumn.CellTemplate>
                 <DataTemplate>
-                    <Button Content="Supprimer" ClickMode="Press" x:Name="SupprButton" Click="SupprButton_Click"/>
+                            <Button Content="Supprimer" ClickMode="Press" Style="{StaticResource DeleteButtonStyle}" x:Name="SupprButton" Click="SupprButton_Click"/>
                 </DataTemplate>
             </DataGridTemplateColumn.CellTemplate>
         </DataGridTemplateColumn>

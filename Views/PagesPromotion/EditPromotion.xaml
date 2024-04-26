@@ -17,7 +17,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Label Content="Nom:" Width="Auto" HorizontalAlignment="Right"/>
-            <TextBox x:Name="PromoNom" Grid.Column="1" Width="Auto" HorizontalAlignment="Stretch"/>
-            <Button Content="Accept" x:Name="AcceptButton" Click="AcceptButton_Click" Grid.Column="2" Width="Auto"/>
+            <TextBox x:Name="PromoNom" Grid.Column="1" Width="Auto" HorizontalAlignment="Stretch" Style="{StaticResource SimpleTextBoxStyle}"/>
+        <Button Content="Accept" x:Name="AcceptButton" Click="AcceptButton_Click" Grid.Column="2" Width="Auto" Style="{StaticResource ValidationButtonStyle}"/>
         </Grid>
 </Page>

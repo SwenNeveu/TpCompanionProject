@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TpCompanionProject.Class;
+using TpCompanionProject.Views.PagesPromotion;
 
 namespace TpCompanionProject.Views.Pages_TP
 {
@@ -79,15 +80,17 @@ namespace TpCompanionProject.Views.Pages_TP
 
         public void ViewTaches_Click(object sender, RoutedEventArgs e)
         {
-            Button button = (Button)sender;
-            Promotion promo = (Promotion)button.DataContext;
+            //Button button = (Button)sender;
+            //Promotion promo = (Promotion)button.DataContext;
             //ViewTaches viewTaches = new ViewTaches(promo);
             //NavigationService.Navigate(viewTaches);
         }
 
         public void Modifier_Click(object sender, RoutedEventArgs e)
         {
-
+            Button button = (Button)sender;
+            Tp tp = (Tp)button.DataContext;
+            NavigationService.Navigate(new EditTP(tp));
         }
         public void Supprimer_Click(object sender, RoutedEventArgs e)
         {
@@ -96,7 +99,7 @@ namespace TpCompanionProject.Views.Pages_TP
 
         private void AddTpButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.Navigate(new AddTP());
         }
     }
 }

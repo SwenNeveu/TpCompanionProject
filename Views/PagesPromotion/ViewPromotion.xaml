@@ -23,7 +23,7 @@
                 <DataGridTemplateColumn Header="Voir les Groupes" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Voir les Groupes" ClickMode="Press" x:Name="VoirGroupeButton" Click="VoirGroupeButton_Click"/>
+                            <Button Content="Voir les Groupes" Style="{StaticResource ValidationButtonStyle}" ClickMode="Press" x:Name="VoirGroupeButton" Click="VoirGroupeButton_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -32,21 +32,21 @@
                 <DataGridTemplateColumn Header="Voir les Eleves" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Voir les Eleves" x:Name="ButtonVoirEleve" ClickMode="Press" Click="ButtonVoirEleve_Click"/>
+                            <Button Content="Voir les Eleves" Style="{StaticResource ValidationButtonStyle}" x:Name="ButtonVoirEleve" ClickMode="Press" Click="ButtonVoirEleve_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Modifier" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Modifier" x:Name="ModifButton" ClickMode="Press" Click="ButtonEditPromo_Click" InputScope="Default"/>
+                            <Button Content="Modifier" Style="{StaticResource ValidationButtonStyle}" x:Name="ModifButton" ClickMode="Press" Click="ButtonEditPromo_Click" InputScope="Default"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Supprimer" Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Content="Supprimer" ClickMode="Press" x:Name="SupprButton" Click="SupprButton_Click"/>
+                            <Button Content="Supprimer" ClickMode="Press" Style="{StaticResource DeleteButtonStyle}" x:Name="SupprButton" Click="SupprButton_Click"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

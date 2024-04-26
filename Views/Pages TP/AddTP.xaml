@@ -1,0 +1,38 @@
+﻿<Page x:Class="TpCompanionProject.Views.Pages_TP.AddTP"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:TpCompanionProject.Views.Pages_TP"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddTP">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <ComboBox x:Name="PromotionsComboBox" ItemsSource="{Binding Promotions}" Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="5"
+       SelectionChanged="PromotionsComboBox_SelectionChanged" DisplayMemberPath="Nom" SelectedValuePath="Nom" Style="{StaticResource SimpleComboBoxStyle}"/>
+
+        <!-- Selector for groups -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5">
+            <!-- Selector for groups -->
+            <ComboBox x:Name="GroupsComboBox" VerticalAlignment="Center"
+           DisplayMemberPath="Nom" SelectedValuePath="Nom" SelectedIndex="-1"
+           SelectionChanged="GroupsComboBox_SelectionChanged" Width="122" Style="{StaticResource SimpleComboBoxStyle}"/>
+
+            <!-- Button to clear group selection -->
+            <Button x:Name="ClearGroupSelectionButton" Content="Déselectionner" HorizontalAlignment="Right" Margin="5"
+         Visibility="Collapsed" Click="ClearGroupSelectionButton_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1"  x:Name="StackAdd">
+            <TextBox x:Name="titleTextBox" Width="200" Margin="0 10" Style="{StaticResource SimpleTextBoxStyle}"/>
+            <DatePicker x:Name="startDatePicker" Width="200" />
+            <DatePicker x:Name="endDatePicker" Width="200"/>
+            <Button Content="Create TP" Click="AppTpButton_Click" Style="{StaticResource ValidationButtonStyle}" x:Name="CreateTpButton" Width="100" Margin="0 10" Visibility="Hidden"/>
+    </StackPanel>
+    </Grid>
+</Page>

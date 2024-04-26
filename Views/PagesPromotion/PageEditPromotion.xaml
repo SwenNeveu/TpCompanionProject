@@ -11,7 +11,7 @@
   <Grid>
     <StackPanel Orientation="Horizontal" Grid.Column="3" VerticalAlignment="Top" HorizontalAlignment="Center">
             <Label Content="Nom:" Width="Auto"/>
-            <TextBox x:Name="PromoNom" Grid.Column="1" Width="Auto"/>
+            <TextBox x:Name="PromoNom" Grid.Column="1" Width="Auto" Style="{StaticResource SimpleTextBoxStyle}"/>
       <Button Content="Accept" x:Name="AcceptButton" Click="AcceptButton_Click" Grid.Column="2" Width="Auto"/>
     </StackPanel>
   </Grid>
