@@ -1,8 +1,24 @@
+-- --------------------------------------------------------
+-- Host:                         127.0.0.1
+-- Server version:               8.0.30 - MySQL Community Server - GPL
+-- Server OS:                    Win64
+-- HeidiSQL Version:             12.1.0.6537
+-- --------------------------------------------------------
 
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+-- Dumping structure for table tpcompanion.aide
 CREATE TABLE IF NOT EXISTS `aide` (
   `id_aide` int NOT NULL AUTO_INCREMENT,
-  `dte_demande` varchar(50) NOT NULL DEFAULT '0',
-  `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
+  `dte_demande` datetime NOT NULL,
+  `description` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '0',
   `fk_id_tp` int DEFAULT NULL,
   `fk_id_eleve` int DEFAULT NULL,
   PRIMARY KEY (`id_aide`),
@@ -10,9 +26,11 @@ CREATE TABLE IF NOT EXISTS `aide` (
   KEY `fk_eleve_aide` (`fk_id_eleve`),
   CONSTRAINT `fk_eleve_aide` FOREIGN KEY (`fk_id_eleve`) REFERENCES `eleve` (`id_eleve`),
   CONSTRAINT `fk_tp_aide` FOREIGN KEY (`fk_id_tp`) REFERENCES `tp` (`id_tp`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Data exporting was unselected.
 
+-- Dumping structure for table tpcompanion.eleve
 CREATE TABLE IF NOT EXISTS `eleve` (
   `id_eleve` int NOT NULL AUTO_INCREMENT,
   `identifiant` varchar(50) DEFAULT NULL,
@@ -26,8 +44,11 @@ CREATE TABLE IF NOT EXISTS `eleve` (
   KEY `fk_id_promo` (`fk_id_promo`) USING BTREE,
   CONSTRAINT `fk_eleve_groupe` FOREIGN KEY (`fk_id_groupe`) REFERENCES `groupe` (`id_groupe`),
   CONSTRAINT `fk_eleve_promo` FOREIGN KEY (`fk_id_promo`) REFERENCES `promotion` (`id_promo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Data exporting was unselected.
+
+-- Dumping structure for table tpcompanion.eleve_tache
 CREATE TABLE IF NOT EXISTS `eleve_tache` (
   `fk_id_eleve` int NOT NULL,
   `fk_id_tache` int NOT NULL,
@@ -38,6 +59,9 @@ CREATE TABLE IF NOT EXISTS `eleve_tache` (
   CONSTRAINT `fk_tache_eleve` FOREIGN KEY (`fk_id_tache`) REFERENCES `tache` (`id_tache`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Data exporting was unselected.
+
+-- Dumping structure for table tpcompanion.groupe
 CREATE TABLE IF NOT EXISTS `groupe` (
   `id_groupe` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) DEFAULT NULL,
@@ -45,16 +69,20 @@ CREATE TABLE IF NOT EXISTS `groupe` (
   PRIMARY KEY (`id_groupe`),
   KEY `fk_id_promo` (`fk_id_promo`),
   CONSTRAINT `fk_id_promo` FOREIGN KEY (`fk_id_promo`) REFERENCES `promotion` (`id_promo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Data exporting was unselected.
 
+-- Dumping structure for table tpcompanion.promotion
 CREATE TABLE IF NOT EXISTS `promotion` (
   `id_promo` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id_promo`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Data exporting was unselected.
 
+-- Dumping structure for table tpcompanion.tache
 CREATE TABLE IF NOT EXISTS `tache` (
   `id_tache` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT '',
@@ -64,22 +92,33 @@ CREATE TABLE IF NOT EXISTS `tache` (
   PRIMARY KEY (`id_tache`),
   KEY `fk_id_tp` (`fk_id_tp`),
   CONSTRAINT `fk_id_tp` FOREIGN KEY (`fk_id_tp`) REFERENCES `tp` (`id_tp`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+-- Data exporting was unselected.
+
+-- Dumping structure for table tpcompanion.tp
 CREATE TABLE IF NOT EXISTS `tp` (
   `id_tp` int NOT NULL AUTO_INCREMENT,
   `nom` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `dte_debut` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `dte_fin` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `is_visible` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `fk_tp_promo` int DEFAULT NULL,
-  `fk_tp_groupe` int DEFAULT NULL,
+  `dte_debut` datetime NOT NULL,
+  `dte_fin` datetime NOT NULL,
+  `is_visible` tinyint(1) NOT NULL DEFAULT '0',
+  `fk_id_promo` int DEFAULT NULL,
+  `fk_id_groupe` int DEFAULT NULL,
   PRIMARY KEY (`id_tp`),
-  KEY `fk_tp_promo` (`fk_tp_promo`) USING BTREE,
-  KEY `fk_tp_groupe` (`fk_tp_groupe`) USING BTREE,
-  CONSTRAINT `fk_tp_groupe` FOREIGN KEY (`fk_tp_groupe`) REFERENCES `groupe` (`id_groupe`),
-  CONSTRAINT `fk_tp_promo` FOREIGN KEY (`fk_tp_promo`) REFERENCES `promotion` (`id_promo`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_tp_promo` (`fk_id_promo`) USING BTREE,
+  KEY `fk_tp_groupe` (`fk_id_groupe`) USING BTREE,
+  CONSTRAINT `fk_tp_groupe` FOREIGN KEY (`fk_id_groupe`) REFERENCES `groupe` (`id_groupe`),
+  CONSTRAINT `fk_tp_promo` FOREIGN KEY (`fk_id_promo`) REFERENCES `promotion` (`id_promo`)
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- Data exporting was unselected.
+
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40111 SET SQL_NOTES=IFNULL(@OLD_SQL_NOTES, 1) */;
 
 INSERT INTO `promotion` (`id_promo`, `nom`) VALUES
 (1, '2021'),
@@ -139,46 +178,46 @@ INSERT INTO `eleve` (`id_eleve`, `identifiant`, `password`, `prenom`, `nom`, `fk
 (20, 'eleve20', 'password20', 'prenom20', 'nom20', 20, 10);
 
 INSERT INTO `tp` (`id_tp`, `nom`, `dte_debut`, `dte_fin`, `is_visible`, `fk_tp_promo`, `fk_tp_groupe`) VALUES
-(1, 'tp1', '2021-01-01', '2021-01-31', 'yes', 1, 1),
-(2, 'tp2', '2021-02-01', '2021-02-28', 'yes', 1, 1),
-(3, 'tp3', '2021-03-01', '2021-03-31', 'yes', 1, 2),
-(4, 'tp4', '2021-04-01', '2021-04-30', 'yes', 1, 2),
-(5, 'tp5', '2021-05-01', '2021-05-31', 'yes', 2, 3),
-(6, 'tp6', '2021-06-01', '2021-06-30', 'yes', 2, 3),
-(7, 'tp7', '2021-07-01', '2021-07-31', 'yes', 2, 4),
-(8, 'tp8', '2021-08-01', '2021-08-31', 'yes', 2, 4),
-(9, 'tp9', '2021-09-01', '2021-09-30', 'yes', 3, 5),
-(10, 'tp10', '2021-10-01', '2021-10-31', 'yes', 3, 5),
-(11, 'tp11', '2021-11-01', '2021-11-30', 'yes', 3, 6),
-(12, 'tp12', '2021-12-01', '2021-12-31', 'yes', 3, 6),
-(13, 'tp13', '2022-01-01', '2022-01-31', 'yes', 4, 7),
-(14, 'tp14', '2022-02-01', '2022-02-28', 'yes', 4, 7),
-(15, 'tp15', '2022-03-01', '2022-03-31', 'yes', 4, 8),
-(16, 'tp16', '2022-04-01', '2022-04-30', 'yes', 4, 8),
-(17, 'tp17', '2022-05-01', '2022-05-31', 'yes', 5, 9),
-(18, 'tp18', '2022-06-01', '2022-06-30', 'yes', 5, 9),
-(19, 'tp19', '2022-07-01', '2022-07-31', 'yes', 5, 10),
-(20, 'tp20', '2022-08-01', '2022-08-31', 'yes', 5, 10),
-(21, 'tp21', '2022-09-01', '2022-09-30', 'yes', 6, 11),
-(22, 'tp22', '2022-10-01', '2022-10-31', 'yes', 6, 11),
-(23, 'tp23', '2022-11-01', '2022-11-30', 'yes', 6, 12),
-(24, 'tp24', '2022-12-01', '2022-12-31', 'yes', 6, 12),
-(25, 'tp25', '2023-01-01', '2023-01-31', 'yes', 7, 13),
-(26, 'tp26', '2023-02-01', '2023-02-28', 'yes', 7, 13),
-(27, 'tp27', '2023-03-01', '2023-03-31', 'yes', 7, 14),
-(28, 'tp28', '2023-04-01', '2023-04-30', 'yes', 7, 14),
-(29, 'tp29', '2023-05-01', '2023-05-31', 'yes', 8, 15),
-(30, 'tp30', '2023-06-01', '2023-06-30', 'yes', 8, 15),
-(31, 'tp31', '2023-07-01', '2023-07-31', 'yes', 8, 16),
-(32, 'tp32', '2023-08-01', '2023-08-31', 'yes', 8, 16),
-(33, 'tp33', '2023-09-01', '2023-09-30', 'yes', 9, 17),
-(34, 'tp34', '2023-10-01', '2023-10-31', 'yes', 9, 17),
-(35, 'tp35', '2023-11-01', '2023-11-30', 'yes', 9, 18),
-(36, 'tp36', '2023-12-01', '2023-12-31', 'yes', 9, 18),
-(37, 'tp37', '2024-01-01', '2024-01-31', 'yes', 10, 19),
-(38, 'tp38', '2024-02-01', '2024-02-29', 'yes', 10, 19),
-(39, 'tp39', '2024-03-01', '2024-03-31', 'yes', 10, 20),
-(40, 'tp40', '2024-04-01', '2024-04-30', 'yes', 10, 20);
+(1, 'tp1', '2021-01-01', '2021-01-31', 1, 1, 1),
+(2, 'tp2', '2021-02-01', '2021-02-28', 1, 1, 1),
+(3, 'tp3', '2021-03-01', '2021-03-31', 1, 1, 2),
+(4, 'tp4', '2021-04-01', '2021-04-30', 1, 1, 2),
+(5, 'tp5', '2021-05-01', '2021-05-31', 1, 2, 3),
+(6, 'tp6', '2021-06-01', '2021-06-30', 1, 2, 3),
+(7, 'tp7', '2021-07-01', '2021-07-31', 1, 2, 4),
+(8, 'tp8', '2021-08-01', '2021-08-31', 1, 2, 4),
+(9, 'tp9', '2021-09-01', '2021-09-30', 1, 3, 5),
+(10, 'tp10', '2021-10-01', '2021-10-31', 1, 3, 5),
+(11, 'tp11', '2021-11-01', '2021-11-30', 1, 3, 6),
+(12, 'tp12', '2021-12-01', '2021-12-31', 1, 3, 6),
+(13, 'tp13', '2022-01-01', '2022-01-31', 1, 4, 7),
+(14, 'tp14', '2022-02-01', '2022-02-28', 1, 4, 7),
+(15, 'tp15', '2022-03-01', '2022-03-31', 1, 4, 8),
+(16, 'tp16', '2022-04-01', '2022-04-30', 1, 4, 8),
+(17, 'tp17', '2022-05-01', '2022-05-31', 1, 5, 9),
+(18, 'tp18', '2022-06-01', '2022-06-30', 1, 5, 9),
+(19, 'tp19', '2022-07-01', '2022-07-31', 1, 5, 10),
+(20, 'tp20', '2022-08-01', '2022-08-31', 1, 5, 10),
+(21, 'tp21', '2022-09-01', '2022-09-30', 1, 6, 11),
+(22, 'tp22', '2022-10-01', '2022-10-31', 1, 6, 11),
+(23, 'tp23', '2022-11-01', '2022-11-30', 1, 6, 12),
+(24, 'tp24', '2022-12-01', '2022-12-31', 1, 6, 12),
+(25, 'tp25', '2023-01-01', '2023-01-31', 1, 7, 13),
+(26, 'tp26', '2023-02-01', '2023-02-28', 1, 7, 13),
+(27, 'tp27', '2023-03-01', '2023-03-31', 1, 7, 14),
+(28, 'tp28', '2023-04-01', '2023-04-30', 1, 7, 14),
+(29, 'tp29', '2023-05-01', '2023-05-31', 1, 8, 15),
+(30, 'tp30', '2023-06-01', '2023-06-30', 1, 8, 15),
+(31, 'tp31', '2023-07-01', '2023-07-31', 1, 8, 16),
+(32, 'tp32', '2023-08-01', '2023-08-31', 1, 8, 16),
+(33, 'tp33', '2023-09-01', '2023-09-30', 1, 9, 17),
+(34, 'tp34', '2023-10-01', '2023-10-31', 1, 9, 17),
+(35, 'tp35', '2023-11-01', '2023-11-30', 1, 9, 18),
+(36, 'tp36', '2023-12-01', '2023-12-31', 1, 9, 18),
+(37, 'tp37', '2024-01-01', '2024-01-31', 1, 10, 19),
+(38, 'tp38', '2024-02-01', '2024-02-29', 1, 10, 19),
+(39, 'tp39', '2024-03-01', '2024-03-31', 1, 10, 20),
+(40, 'tp40', '2024-04-01', '2024-04-30', 1, 10, 20);
 
 INSERT INTO `tache` (`id_tache`, `nom`, `description`, `ordre`, `fk_id_tp`) VALUES
 (1, 'tache1', 'description1', 1, 1),
