@@ -31,7 +31,6 @@ namespace TpCompanionProject.Ado
             ado.CloseConnection(connection);
             return Tps;
         }
-
         //get the tps for a group in a promotion
         public List<Tp> GetTpsByGroupe(int fk_id_groupe, int fk_id_promo)
         {
