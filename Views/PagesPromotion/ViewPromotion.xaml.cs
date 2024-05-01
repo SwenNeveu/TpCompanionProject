@@ -58,6 +58,8 @@ namespace TpCompanionProject.Views.PagesPromotion
                 adoPromo.DeletePromo(promo);
                 Promotions.Remove(promo);
                 GridPromotion.Items.Refresh();
+                App app = (App)Application.Current;
+                app.Refresh();
                 //faire les alertes +
             }
             catch (Exception ex)

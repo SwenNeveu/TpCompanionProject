@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `groupe` (
   `fk_id_promo` int DEFAULT NULL,
   PRIMARY KEY (`id_groupe`),
   KEY `fk_id_promo` (`fk_id_promo`),
-  CONSTRAINT `fk_id_promo` FOREIGN KEY (`fk_id_promo`) REFERENCES `promotion` (`id_promo`)
+  CONSTRAINT `fk_id_promo` FOREIGN KEY (`fk_id_promo`) REFERENCES `promotion` (`id_promo`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage de la structure de table tpcompanion. eleve
@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS `eleve` (
   PRIMARY KEY (`id_eleve`),
   KEY `fk_id_groupe` (`fk_id_groupe`) USING BTREE,
   KEY `fk_id_promo` (`fk_id_promo`) USING BTREE,
-  CONSTRAINT `fk_eleve_groupe` FOREIGN KEY (`fk_id_groupe`) REFERENCES `groupe` (`id_groupe`),
-  CONSTRAINT `fk_eleve_promo` FOREIGN KEY (`fk_id_promo`) REFERENCES `promotion` (`id_promo`)
+  CONSTRAINT `fk_eleve_groupe` FOREIGN KEY (`fk_id_groupe`) REFERENCES `groupe` (`id_groupe`) ON DELETE SET NULL,
+  CONSTRAINT `fk_eleve_promo` FOREIGN KEY (`fk_id_promo`) REFERENCES `promotion` (`id_promo`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE IF NOT EXISTS `tp` (
@@ -42,9 +42,9 @@ CREATE TABLE IF NOT EXISTS `tp` (
   PRIMARY KEY (`id_tp`),
   KEY `fk_tp_promo` (`fk_id_promo`) USING BTREE,
   KEY `fk_tp_groupe` (`fk_id_groupe`) USING BTREE,
-  CONSTRAINT `fk_tp_groupe` FOREIGN KEY (`fk_id_groupe`) REFERENCES `groupe` (`id_groupe`),
-  CONSTRAINT `fk_tp_promo` FOREIGN KEY (`fk_id_promo`) REFERENCES `promotion` (`id_promo`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_tp_groupe` FOREIGN KEY (`fk_id_groupe`) REFERENCES `groupe` (`id_groupe`) ON DELETE CASCADE,
+  CONSTRAINT `fk_tp_promo` FOREIGN KEY (`fk_id_promo`) REFERENCES `promotion` (`id_promo`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage de la structure de table tpcompanion. aide
 CREATE TABLE IF NOT EXISTS `aide` (
@@ -56,9 +56,9 @@ CREATE TABLE IF NOT EXISTS `aide` (
   PRIMARY KEY (`id_aide`),
   KEY `fk_tp_aide` (`fk_id_tp`),
   KEY `fk_eleve_aide` (`fk_id_eleve`),
-  CONSTRAINT `fk_eleve_aide` FOREIGN KEY (`fk_id_eleve`) REFERENCES `eleve` (`id_eleve`),
-  CONSTRAINT `fk_tp_aide` FOREIGN KEY (`fk_id_tp`) REFERENCES `tp` (`id_tp`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  CONSTRAINT `fk_eleve_aide` FOREIGN KEY (`fk_id_eleve`) REFERENCES `eleve` (`id_eleve`) ON DELETE CASCADE,
+  CONSTRAINT `fk_tp_aide` FOREIGN KEY (`fk_id_tp`) REFERENCES `tp` (`id_tp`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage de la structure de table tpcompanion. tache
 CREATE TABLE IF NOT EXISTS `tache` (
@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `tache` (
   `fk_id_tp` int DEFAULT NULL,
   PRIMARY KEY (`id_tache`),
   KEY `fk_id_tp` (`fk_id_tp`),
-  CONSTRAINT `fk_id_tp` FOREIGN KEY (`fk_id_tp`) REFERENCES `tp` (`id_tp`)
+  CONSTRAINT `fk_id_tp` FOREIGN KEY (`fk_id_tp`) REFERENCES `tp` (`id_tp`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 
@@ -80,8 +80,8 @@ CREATE TABLE IF NOT EXISTS `eleve_tache` (
   `etat` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`fk_id_eleve`,`fk_id_tache`),
   KEY `fk_tache_eleve` (`fk_id_tache`),
-  CONSTRAINT `fk_eleve_tache` FOREIGN KEY (`fk_id_eleve`) REFERENCES `eleve` (`id_eleve`),
-  CONSTRAINT `fk_tache_eleve` FOREIGN KEY (`fk_id_tache`) REFERENCES `tache` (`id_tache`)
+  CONSTRAINT `fk_eleve_tache` FOREIGN KEY (`fk_id_eleve`) REFERENCES `eleve` (`id_eleve`) ON DELETE CASCADE,
+  CONSTRAINT `fk_tache_eleve` FOREIGN KEY (`fk_id_tache`) REFERENCES `tache` (`id_tache`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 

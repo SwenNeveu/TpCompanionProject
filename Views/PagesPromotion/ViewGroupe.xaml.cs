@@ -62,6 +62,8 @@ namespace TpCompanionProject.Views.PagesPromotion
             adoGroupe.DeleteGroupe(groupe);
             Promotion.Groupes.Remove(groupe);
             GridGroupe.Items.Refresh();
+            App app = (App)Application.Current;
+            app.Refresh();
         }
     }
 }

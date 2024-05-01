@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TpCompanionProject.Ado;
 using TpCompanionProject.Class;
 using TpCompanionProject.Views.PagesPromotion;
 
@@ -94,6 +95,15 @@ namespace TpCompanionProject.Views.Pages_TP
         }
         public void Supprimer_Click(object sender, RoutedEventArgs e)
         {
+            Button button = (Button)sender;
+            Promotion promotion = (Promotion)PromotionsComboBox.SelectedItem;
+            Tp tp = (Tp)button.DataContext;
+            App app = (App)Application.Current;
+            AdoTp adoTp = new AdoTp();
+            adoTp.DeleteTp(tp);
+            promotion.Tps.Remove(tp);
+            app.Refresh();
+            TPsDataGrid.Items.Refresh();
 
         }
 
